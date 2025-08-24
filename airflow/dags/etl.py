@@ -1,7 +1,7 @@
 from etl_config import config
 from airflow.decorators import task
 from airflow.models import DAG, Variable
-from scripts.src import fetch_adzuna_to_spark_df, merge_to_delta_table, get_spark
+from scripts.src import fetch_adzuna_to_spark_df, merge_to_delta_table, get_spark, get_table_records_cnt
 import logging
 
 
@@ -33,7 +33,7 @@ with DAG(
         logging.info("Merging fetched data into databricks delta table")
         merge_to_delta_table(spark, df, table_fqn)
 
-        table_records_cnt = spark.sql("select count(*) from identifier(adzuna_table)", adzuna_table=table_fqn).collect()[0][0]
+        table_records_cnt = get_table_records_cnt(spark, table_fqn)
         logging.info(f"Number of records after merge: {table_records_cnt}")
 
         logging.info("Closing spark session")

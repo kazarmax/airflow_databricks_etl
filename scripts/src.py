@@ -111,8 +111,8 @@ def fetch_adzuna_to_spark_df(
 
 def merge_to_delta_table(spark: SparkSession, df: DataFrame, table_fqn: str):
     df.createOrReplaceTempView("temp_view_adzuna_jobs")
-    spark.sql("""
-        MERGE INTO identifier(adzuna_target_table) AS t
+    spark.sql(f"""
+        MERGE INTO {table_fqn} AS t
         USING (
         SELECT
             id,
@@ -169,9 +169,7 @@ def merge_to_delta_table(spark: SparkSession, df: DataFrame, table_fqn: str):
             s.created,
             current_timestamp()
         )
-    """,
-    adzuna_target_table = table_fqn
-    )
+    """)
 
 
 def get_table_records_cnt(spark: SparkSession, table_fqn: str):
