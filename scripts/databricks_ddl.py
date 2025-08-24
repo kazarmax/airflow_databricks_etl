@@ -31,8 +31,11 @@ try:
     """)
 
     logging.info("Closing spark session")
-    if spark:
-        spark.stop()
+    try:
+        if spark:
+            spark.stop()
+    except Exception as e:
+        logging.warning(f"Error while stopping Spark session: {e}")
 
     logging.info("Done")
 
