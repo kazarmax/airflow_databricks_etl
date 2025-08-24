@@ -17,6 +17,9 @@ To run this project, you need the following:
 ## How to Run the Pipeline
 
 1. Clone the project github repo
+```
+git clone https://github.com/kazarmax/airflow_databricks_etl.git
+```
 
 2. Open the project folder in VS Code
 
