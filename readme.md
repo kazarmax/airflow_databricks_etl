@@ -33,14 +33,23 @@ docker compose up -d
 
 5. In Airflow UI, add and fill in variables `ADZUNA_APP_ID` and `ADZUNA_APP_KEY` using values from your Adzuna API account
 
-6. In Airflow UI, add a Connection to Databricks. Fill in the Host and Password fields using your databricks account. For the password, generate and use personal token from Databricks.
+6. In your Databricks Free Edition account, create and save securely Personal Access Token (PAT)
+* Go to Settings → User Settings → Access Tokens
+* Click Generate New Token
+* Copy and save it securely
 
-7. Create catalog, schema and table in databricks unity catalog by running the following command in the terminal locally:
+7. In Airflow UI, add a Connection to Databricks: 
+* Connection ID = `databricks_default`
+* Connection Type = `Databricks`
+* Host - take it from your Databricks Free Edition account URL, for example `https://abc123.cloud.databricks.com`
+* Password - use your Databricks token
+
+8. Create catalog, schema and table in databricks unity catalog by running the following command in the terminal locally:
 
 ```
 docker compose exec -T airflow-scheduler python /opt/python/scripts/databricks_ddl.py
 ```
 
-8. In Airflow UI, open and run the `load_adzuna_jobs` DAG
+9. In Airflow UI, open and run the `load_adzuna_jobs` DAG
 
-9. Upon successful execution of the DAG, log in to Databricks and check if the table `adzuna.prj.jobs` exists and contains data.
+10. Upon successful execution of the DAG, log in to Databricks and check if the table `adzuna.prj.jobs` exists and contains data.
