@@ -26,10 +26,14 @@ with DAG(
         )
         logging.info(f"number of fetched records from Adzuna = {df.count()}")
 
+        # Building adzuna table fully qualified name
+        table_fqn = f"{config.target_catalog}.{config.target_schema}.{config.adzuna_table_name}"
+        logging.info(f"Adzuna table fully qualified name: '{table_fqn}'")
+
         logging.info("Merging fetched data into databricks delta table")
-        merge_to_delta_table(spark, df)
-        
-        table_records_cnt = spark.sql(f"select count(*) from adzuna.prj.jobs").collect()[0][0]
+        merge_to_delta_table(spark, df, table_fqn)
+
+        table_records_cnt = spark.sql("select count(*) from identifier(adzuna_table)", adzuna_table=table_fqn).collect()[0][0]
         logging.info(f"Number of records after merge: {table_records_cnt}")
 
         logging.info("Closing spark session")
