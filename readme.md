@@ -50,6 +50,6 @@ docker compose up -d
 docker compose exec -T airflow-scheduler python /opt/python/scripts/databricks_ddl.py
 ```
 
-9. In Airflow UI, open and run the `load_adzuna_jobs` DAG
+9. In Airflow UI, open and run the `adzuna_etl_dag` DAG
 
 10. Upon successful execution of the DAG, log in to Databricks and check if the table `adzuna.prj.jobs` exists and contains data.
