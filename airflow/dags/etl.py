@@ -1,7 +1,7 @@
 from etl_config import config
 from airflow.decorators import task
 from airflow.models import DAG, Variable
-from scripts.adzuna import fetch_adzuna_to_spark_df, merge_to_delta_table, get_spark
+from scripts.src import fetch_adzuna_to_spark_df, merge_to_delta_table, get_spark
 import logging
 
 

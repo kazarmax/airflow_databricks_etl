@@ -1,6 +1,6 @@
 # Init scripts to create catalog, schema and table in databricks
 
-from scripts.adzuna import get_spark
+from scripts.src import get_spark
 import logging
 
 
