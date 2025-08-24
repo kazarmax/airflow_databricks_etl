@@ -1,6 +1,7 @@
 import os
 from munch import Munch
 from airflow.models import Variable
+from datetime import datetime, timezone
 
 
 airflow_env = os.getenv("AIRFLOW_ENV", "local")
@@ -10,8 +11,8 @@ config = {}
 if airflow_env in ("local"):
     config.update({
         # airflow params
-        "schedule": None,
-        "start_date": None,
+        "schedule": "@hourly",
+        "start_date": datetime(2025, 8, 24, 0, 0, 0, tzinfo=timezone.utc),  # timezone-aware
         "end_date": None,
         "catchup": False,
         "max_active_runs": 1,
