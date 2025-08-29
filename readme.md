@@ -4,7 +4,7 @@
 
 This project showcases an ETL pipeline built using Apache Airflow to retrieve job listing data from the Adzuna API, transform it, and load it into a Databricks delta table. The entire setup runs in Docker, ensuring a consistent and reproducible environment for extracting, transforming, and loading data.
 
-For more details, check <link to article>
+For more details, check https://medium.com/@kazarmax/hands-on-project-building-a-simple-api-to-delta-pipeline-with-airflow-and-databricks-connect-028881ba3585
 
 ## Prerequisites
 
